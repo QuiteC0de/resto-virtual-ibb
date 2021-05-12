@@ -20,41 +20,13 @@
         <!-- End banner Area -->
 
         <div class="container">
-        	@if(count($menu) == 0)
+			<div class="row mb-3">
+			@forelse ($menu as $data)
+				@include('component.dapur-task-list')
+			@empty
 				@include('component.empty')
-	        @else
-	        	<div class="table-responsive-sm">
-		        	<table class="table">
-		        		<thead class="thead-dark">
-		        			<tr class="col-md-12">
-		        				<th>Kode</th>
-		        				<th>Menu</th>
-		        				<th>Jumlah</th>
-		        				<th>Posisi</th>
-		        				<th>deskripsi</th>
-		        				<th></th>
-		        			</tr>
-		        		</thead>
-					@foreach ($menu as $menu)
-		        		<tr>
-		        			<td>{{$menu->kd_pesanan}}</td>
-		        			<td>{{$menu->nama_menu}}</td>
-		        			<td>{{$menu->jml_menu}}</td>
-		        			<td>{{$menu->jenis_pesan}}</td>
-		        			<td>{{$menu->ket}}</td>
-		        			<td>
-		        				<form action="/dapur/{{$menu->id_pesanan}}" method="post">
-									@csrf
-									<input type="hidden" name="_method" value="put">
-									<input type="hidden" name="kd" value="{{$menu->kd_pesanan}}">
-									<button class="btn btn-outline-danger" type="submit">Kerjakan</button>	
-								</form>	
-		        			</td>
-		        		</tr>
-		        	@endforeach
-		        	</table>
-		        </div>
-	        @endif
+			@endforelse
+			</div>
         </div>
 
 @include('template.script')
